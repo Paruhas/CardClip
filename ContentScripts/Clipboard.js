@@ -16,8 +16,10 @@ function init() {
 
   cards = loadClipboardFromStorage();
 
+  // card detail page
   const detailPageCards = document.getElementsByClassName("card-image");
   const isTagger = document.location.host.includes("tagger");
+
   if (detailPageCards && detailPageCards[0] && !isTagger) {
     initCardElement(detailPageCards[0]);
   } else {
@@ -379,23 +381,43 @@ function loadClipboardFromStorage() {
  * @returns {string} the name of the card
  */
 function getCardName(element) {
-  // Try to get the name using the invisible label
-  const labels = Array.from(
-    element.getElementsByClassName("card-grid-item-invisible-label")
-  );
-  for (index in labels) {
-    if (labels[index].textContent) {
-      return labels[index].textContent;
+  const currPath = document.location.pathname || "";
+  const arrayCurrPath = currPath.split("/") || [];
+  const currPage = currPath.split("/")[1] || "";
+
+  let name = "";
+  let setValue = arrayCurrPath[2] || "";
+  let cardNumber = arrayCurrPath[3] || "";
+
+  let result = "";
+
+  // IF Condition for page sets and search
+  if ((currPage === "sets" && Boolean(setValue)) || currPage === "search") {
+    const labels = Array.from(
+      element.getElementsByClassName("card-grid-item-card")
+    );
+    for (index in labels) {
+      const label = labels[index];
+
+      setValue = label?.pathname?.split("/")[2] || "";
+      cardNumber = label?.pathname?.split("/")[3] || "";
     }
+    const cardImgElement = element.getElementsByTagName("img")[0];
+    name = cardImgElement?.title?.split(" (")[0] || "";
+
+    result = `${name} (${setValue}) ${cardNumber}`;
   }
 
-  // Try to get the name using the alt text for the image (used primarily for tagger)
-  const images = element.getElementsByTagName("img");
-  if (images.length > 0 && images[0].getAttribute("alt")) {
-    return images[0].getAttribute("alt");
+  // IF Condition for card detail page
+  if (currPage === "card") {
+    const cardElement = document.getElementsByClassName("card-image-front")[0];
+    const cardImgElement = cardElement.getElementsByTagName("img")[0];
+    name = cardImgElement?.title?.split(" (")[0] || "";
+
+    result = `${name} (${setValue}) ${cardNumber}`;
   }
 
-  return getSingleCardName(element);
+  return result;
 }
 
 /**
