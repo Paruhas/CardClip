@@ -2,34 +2,20 @@
 
 A browser extension that adds clipboard functionality for Scryfall
 
-This project was created in an attempt to address my own personal struggles with using Scryfall while deckbuilding. Its only job is to allow a user to collect cards as they search on Scryfall and then allow them to copy those cards to their clipboard for use elsewhere.
+This project was forked from original creator.
+I have made some minor updates to the code by modifying the card name format so that it can be used directly for importing into the [Moxfield](https://moxfield.com/) website.
 
-### Downloads
+## Usage
+
+1. Download as zip file and extract
+2. Go to [chrome-extension-page](chrome://extensions/)
+3. click "Load unpacked" and select extracted folder
+
+### Downloads (Official extension - not this update version)
 
 - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/scryfall-clipboard/)
 - [Chrome](https://chrome.google.com/webstore/detail/card-clip/npglimimpnllddjddphoagcngmiipkkc?hl=en)
 
-### Guiding Principles
+### Link
 
-1. Don't modify or obstruct any existing Scryfall functionality.
-2. This is NOT a deckbuilding service. Make no assumptions about what the user is collecting cards for
-
-### Planned Featurelist
-
-- [x] Card clipboard
-  - [x] Link to card page
-  - [x] Add/remove cards from clipboard
-  - [x] Copy card clipboard to the user's clipboard
-  - [x] Toggle clipboard visibility
-  - [x] Persist card clipboard in local storage
-  - [x] Clear card clipboard
-- [ ] Query History
-  - [ ] Add current query
-  - [ ] Remove individual query
-  - [ ] Clear all queries
-  - [ ] Toggle history visibility
-  - [ ] Persist history to local storage
-
-# Contributing
-
-If you're interested in this project and would like to contribute, open a PR!
+- [Original CardClip Project](https://github.com/JacobHearst/CardClip)
